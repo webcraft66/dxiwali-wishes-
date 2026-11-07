@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bunny's Magical Diwali 🐰🪔</title>
+<meta name="description" content="A magical 3D Diwali greeting: a baby bunny with funny Hinglish jokes, shayari, fireworks and a personalized wish card.">
+<meta name="author" content="Mansi">
+<meta name="theme-color" content="#1a0b3b">
+<meta property="og:title" content="Bunny's Magical Diwali 🐰🪔">
+<meta property="og:description" content="Meet the baby bunny, get your personalized Diwali wish and share it!">
+<meta property="og:type" content="website">
+<style>
+*{box-sizing:border-box;margin:0}
+:root{--g:#ffd76a;--o:#ff9a3c;--p:#ff9ec4;--v:#5b2a9e}
+html,body{height:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#fff;background:radial-gradient(120% 90% at 50% 0%,#4a1c8c 0%,#2a0f5c 45%,#12062c 100%);overflow:hidden;display:flex;flex-direction:column}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+#top{position:absolute;top:8px;right:8px;z-index:6;display:flex;gap:6px}
+.ic{background:rgba(255,255,255,.12);border:1px solid rgba(255,215,106,.4);color:#fff;border-radius:999px;padding:7px 12px;font-size:.8rem;cursor:pointer;backdrop-filter:blur(8px)}
+#stage{position:relative;flex:0 0 44vh;min-height:270px;overflow:hidden}
+#stage.g{touch-action:none}
+.gi{position:absolute;font-size:28px;transform:translateX(-50%);pointer-events:none;z-index:3}
+select{width:100%;padding:12px;border-radius:12px;border:1px solid var(--g);background:#2a0f5c;color:#fff;font-size:1rem;margin:6px 0}
+#stage canvas#c{width:100%;height:100%;display:block}
+#rang{position:absolute;left:50%;bottom:6%;width:min(70vw,300px);aspect-ratio:1;transform:translateX(-50%) rotateX(68deg);border-radius:50%;opacity:.5;background:repeating-conic-gradient(from 0deg,var(--g) 0 8deg,var(--p) 8deg 16deg,var(--o) 16deg 24deg,transparent 24deg 32deg);-webkit-mask:radial-gradient(circle,transparent 18%,#000 19% 60%,transparent 62%);mask:radial-gradient(circle,transparent 18%,#000 19% 60%,transparent 62%);animation:spin 40s linear infinite;pointer-events:none}
+@keyframes spin{to{transform:translateX(-50%) rotateX(68deg) rotateZ(360deg)}}
+#diyas{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-around;padding:0 4%}
+.diya{font-size:1.7rem;filter:grayscale(1) brightness(.5);transition:.5s;cursor:pointer;background:none;border:0}
+.diya.on{filter:none;text-shadow:0 0 18px var(--o),0 0 38px var(--g);transform:scale(1.15)}
+#ui{flex:1;overflow-y:auto;padding:10px 14px 24px;max-width:640px;width:100%;margin:0 auto;z-index:4}
+.glass{background:rgba(255,255,255,.1);border:1px solid rgba(255,215,106,.35);border-radius:20px;padding:16px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 8px 32px rgba(0,0,0,.35);margin-bottom:12px}
+#bub{font-size:1.1rem;line-height:1.5;min-height:3.2em}
+#bub.pop{animation:pop .4s}
+@keyframes pop{0%{transform:scale(.92);opacity:.3}100%{transform:none;opacity:1}}
+.btn{background:linear-gradient(135deg,var(--o),#ff5e7e);color:#fff;border:0;border-radius:999px;padding:12px 20px;font-size:1rem;font-weight:700;cursor:pointer;margin:4px 4px 0 0;box-shadow:0 4px 18px rgba(255,154,60,.45);transition:transform .15s}
+.btn:active{transform:scale(.95)}
+.btn.alt{background:rgba(255,255,255,.15);box-shadow:none;border:1px solid var(--g)}
+nav{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
+h2{font-size:1.25rem;color:var(--g);margin-bottom:8px}
+.verse{white-space:pre-line;font-size:1.1rem;line-height:1.7;margin:8px 0;font-style:italic}
+input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--g);background:rgba(0,0,0,.25);color:#fff;font-size:1rem;margin:6px 0}
+#card{margin-top:12px;padding:20px;border-radius:18px;text-align:center;background:linear-gradient(160deg,#3b1480,#7a2a9e 60%,#ff7a3c);border:2px solid var(--g);box-shadow:0 0 30px rgba(255,215,106,.4)}
+#card h3{font-size:1.6rem;color:var(--g);text-shadow:0 0 14px var(--o)}
+.big{font-size:clamp(2.2rem,11vw,4rem);font-weight:900;text-align:center;background:linear-gradient(90deg,#fff3b0,var(--g),var(--o),var(--g));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 14px rgba(255,170,60,.7));animation:pulse 2.5s infinite}
+@keyframes pulse{50%{transform:scale(1.04)}}
+#gate{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,#3a1580cc,#0d0522f2);text-align:center;padding:20px}
+[hidden]{display:none!important}
+#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#000c;border:1px solid var(--g);padding:10px 16px;border-radius:12px;z-index:30;font-size:.9rem}
+small{opacity:.8}
+.sd{font-size:2.4rem;padding:18px;border-radius:18px;border:2px solid rgba(255,255,255,.25);cursor:pointer;background:hsl(var(--h) 60% 22%);filter:grayscale(.5);transition:.15s}
+.sd.lit{background:hsl(var(--h) 100% 55%);filter:none;box-shadow:0 0 30px hsl(var(--h) 100% 60%);transform:scale(1.06)}
+.hd{position:fixed;z-index:8;width:24px;height:24px;font-size:14px;background:none;border:0;opacity:.2;cursor:pointer;transition:.3s}.hd:hover{opacity:.8}
+.hd.f{opacity:1;filter:drop-shadow(0 0 8px gold);transform:scale(1.8)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.5))}
+#rays{position:absolute;left:-30%;right:-30%;top:-10%;height:120%;pointer-events:none;background:repeating-conic-gradient(from -30deg at 50% 0%,rgba(255,215,106,.16) 0 5deg,transparent 5deg 15deg);-webkit-mask:linear-gradient(#000,transparent 85%);mask:linear-gradient(#000,transparent 85%);animation:sway 9s ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
+.glass{animation:up .55s ease both}@keyframes up{from{opacity:0;filter:blur(6px)}}
+#start{animation:glow 1.8s infinite}@keyframes glow{50%{box-shadow:0 0 28px 6px rgba(255,200,80,.7)}}
+.heart{position:fixed;z-index:8;pointer-events:none;font-size:22px;animation:rise 1.6s ease-out forwards}
+@keyframes rise{to{transform:translate(var(--dx),-130px) scale(1.5);opacity:0}}
+#cine{position:fixed;inset:0;z-index:15;pointer-events:none;opacity:0;transition:opacity .7s}#cine.on{opacity:1}
+#cine i{position:absolute;left:0;right:0;height:13vh;background:#000;transition:transform 1s}
+#cine i:first-child{top:0;transform:translateY(-100%)}#cine i:nth-child(2){bottom:0;transform:translateY(100%)}#cine.on i{transform:none}
+#ttl{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px}
+#cine.on h1{animation:ttl 2.8s ease both}#cine.on p{animation:ttl 2.8s .25s ease both}
+@keyframes ttl{0%{opacity:0;letter-spacing:.4em;filter:blur(8px)}35%,80%{opacity:1;letter-spacing:.08em;filter:none}100%{opacity:0}}
+#call{position:fixed;top:28%;left:50%;transform:translateX(-50%);z-index:25;text-align:center;width:min(86vw,320px)}
+.fall{position:fixed;top:-50px;z-index:7;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(115vh) rotate(360deg)}}
+@media (min-width:800px){body{flex-direction:row}#stage{flex:1;min-height:100%}#ui{flex:0 0 440px;max-width:none;padding-top:24px}}
+@media (prefers-reduced-motion:reduce){#rang{animation:none}.big{animation:none}}
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas>
+<div id="top">
+<span class="ic" id="hdc" hidden>🔍 0/10</span>
+<button class="ic" id="snd" aria-label="Toggle sound">🔊 Sound ON</button>
+<button class="ic" id="rep" aria-label="Replay voice">🔁 Replay</button>
+</div>
+<div id="stage"><div id="rays"></div><div id="rang"></div><canvas id="c" aria-label="3D baby bunny"></canvas><div id="diyas"></div></div>
+
+<main id="ui">
+<div class="glass"><p id="bub">…</p><small id="nov" hidden>🔇 Voice isn't supported in this browser, so Bunny will just talk in text. Read along!</small></div>
+<button class="btn" id="start" hidden>Chalo Diwali celebrate karein! ✨</button>
+
+<section class="glass" id="nstep" hidden><h2>Waise tumhara naam kya hai? 😊</h2><input id="nm0" maxlength="30" placeholder="Apna naam likho…" autocomplete="given-name"><button class="btn" id="ngo">Ye mera naam hai ✨</button><button class="btn alt" id="nskip">Skip</button></section>
+<div id="app" hidden>
+<nav>
+<button class="btn alt" data-p="chat">😂 Baatein</button>
+<button class="btn alt" data-p="shayari">🪔 Shayari</button>
+<button class="btn alt" data-p="jokes">🥕 Jokes</button>
+<button class="btn alt" data-p="wish">💌 Wish</button>
+<button class="btn alt" data-p="game">🍬 Game</button>
+<button class="btn alt" data-p="quiz">🧠 Quiz</button>
+<button class="btn alt" data-p="rashi">🔮 Rashifal</button>
+<button class="btn alt" data-p="dress">🎩 Costume</button>
+<button class="btn alt" data-p="crk">🎇 Patakhe</button>
+<button class="btn alt" data-p="talk">🎤 Baat</button>
+<button class="btn alt" data-p="song">🎵 Gaana</button>
+<button class="btn alt" data-p="lan">🏮 Lantern</button>
+<button class="btn alt" data-p="sim">🧩 Diya Game</button>
+<button class="btn alt" data-p="voice">⚙️ Awaaz</button>
+<button class="btn alt" data-p="fin">🎆 Finale</button>
+</nav>
+<div class="glass" style="padding:10px 12px">
+<button class="btn" id="lit">Light Up My Diya 🪔</button>
+<button class="btn" id="burst">Let's Burst Some Happiness! 🎆</button>
+<button class="btn" id="atish">Atishbaazi 🧨</button>
+<button class="btn" id="sur">Surprise Me! 🎁</button>
+</div>
+
+<section class="glass" id="p-chat"><h2>Bunny se baat karo 🐰</h2><button class="btn" id="more">Ek aur funny baat bolo 😂</button><p><small>Psst… bunny ko tap karke dekho 😏 🎁 Surprise Me dabao aur screen par 10 chhupe 🪔 dhundo!</small></p></section>
+
+<section class="glass" id="p-shayari" hidden><h2>Thodi Shayari Ho Jaaye! 🪔</h2><div class="verse" id="verse"></div><button class="btn" id="nextS">Next Shayari ❤️</button></section>
+
+<section class="glass" id="p-jokes" hidden><h2>Bunny Ke Funny Jokes 😂</h2><p id="jq" style="font-size:1.1rem"></p><p id="ja" style="color:var(--g);font-weight:700;margin:8px 0"></p><button class="btn" id="nextJ">Tell me another joke!</button></section>
+
+<section class="glass" id="p-wish" hidden><h2>Waise tumhara naam kya hai? 😊</h2>
+<input id="nm" maxlength="30" placeholder="Apna naam likho…" autocomplete="given-name">
+<button class="btn" id="go">Wish Karo ❤️</button>
+<div id="card" hidden><p>🪔 Happy Diwali 🪔</p><h3 id="cn"></h3><p id="ct" style="margin:8px 0"></p><p>— Bunny 🐰</p></div>
+<button class="btn alt" id="share" hidden>Share Your Wishes</button></section>
+
+<section class="glass" id="p-fin" hidden><div class="big">HAPPY DIWALI ✨</div><p style="text-align:center;margin:10px 0">May your life sparkle with happiness, love, laughter and endless blessings.</p><div style="text-align:center"><button class="btn" id="again">Phir se dekho 🎇</button></div></section>
+<section class="glass" id="p-game" hidden><h2>Mithai Pakdo 🍬</h2><p>Bunny wale area mein ungli ya mouse chalao. 🍬🍫🥕 pakdo, 🧨 se bacho! 30 second!</p><p id="gs" style="color:var(--g);font-weight:700;margin:6px 0">Score: 0</p><button class="btn" id="gst">Start Game 🎮</button></section>
+<section class="glass" id="p-quiz" hidden><h2>Tum Kaun Si Diwali Ho? 🪔</h2><p id="qq" style="font-size:1.1rem;margin-bottom:8px"></p><div id="qo"></div></section>
+<section class="glass" id="p-rashi" hidden><h2>Aaj Ka Diwali Rashifal 🔮</h2><select id="rs"></select><button class="btn" id="rgo">Meri Rashi Batao 🔮</button><p id="rt" style="margin-top:10px;font-size:1.1rem"></p></section>
+<section class="glass" id="p-dress" hidden><h2>Bunny Ka Costume 🎩</h2><button class="btn alt" data-d="topi">🎉 Topi</button><button class="btn alt" data-d="chashma">😎 Chashma</button><button class="btn alt" data-d="mooch">🥸 Mooch</button><button class="btn alt" data-d="pagdi">👑 Pagdi</button><button class="btn alt" data-d="mala">🌼 Mala</button><button class="btn alt" data-d="none">❌ Utaro</button></section>
+<section class="glass" id="p-crk" hidden><h2>Zameen Ke Patakhe 🎇</h2><button class="btn" id="c1">Anaar 🎇</button><button class="btn" id="c2">Chakri 🌀</button><button class="btn" id="c3">Phuljhadi ✨</button></section>
+<section class="glass" id="p-song" hidden><h2>Bunny Ka Gaana 🎵</h2><p style="margin-bottom:8px">Bunny ne apna khud ka Diwali gaana likha hai! 😄 Music ke saath woh cute awaaz mein gaata hai aur naachta hai.</p><div id="lyr" style="font-size:1.4rem;color:var(--g);text-align:center;min-height:3.4em;font-weight:700;text-shadow:0 0 12px var(--o)"></div><button class="btn" id="sgb">🎵 Gaana suno</button><p style="margin-top:8px"><small>Awaaz browser ki hoti hai, isliye woh bolkar-gaata hai, asli singer jaisa nahi. Gaane ke liye Sound ON hona zaroori hai.</small></p></section>
+<section class="glass" id="p-lan" hidden><h2>Wish Lantern 🏮</h2><p style="margin-bottom:6px">Apni wish likho, bunny usse lantern mein daalkar chaand tak bhejega!</p><input id="lw" maxlength="80" placeholder="Meri wish hai…"><button class="btn" id="lb">Lantern udao 🏮</button></section>
+<section class="glass" id="p-sim" hidden><h2>Diya Yaadash Game 🧩</h2><p id="sst">Diye ka order yaad rakho aur dohrao!</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0"><button class="sd" style="--h:20" aria-label="Diya 1">🪔</button><button class="sd" style="--h:50" aria-label="Diya 2">🪔</button><button class="sd" style="--h:330" aria-label="Diya 3">🪔</button><button class="sd" style="--h:270" aria-label="Diya 4">🪔</button></div><button class="btn" id="ssb">Start 🪔</button></section>
+<section class="glass" id="p-voice" hidden><h2>Bunny Ki Awaaz ⚙️</h2><p style="margin-bottom:6px">Apne device ki sabse achhi awaaz chuno aur pitch badlo (kam = bhaari, zyada = patli).</p><select id="vs"></select><p style="margin:8px 0">Pitch: <b id="pv">1.2</b></p><input type="range" id="pt" min="0.6" max="2" step="0.1" value="1.2" style="padding:0"><button class="btn" id="vt">Awaaz sunao 🔊</button><p><small id="vn"></small></p></section>
+<section class="glass" id="p-talk" hidden><h2>Bunny Se Baat Karo 🎤</h2><button class="btn" id="mic">🎤 Bunny se bolo</button><select id="lg"><option value="hi-IN">Hindi / Hinglish</option><option value="en-IN">English (India)</option></select><p id="tn" style="margin:6px 0"><small></small></p><p id="heard" style="margin:8px 0;color:var(--g)"></p><div style="display:flex;gap:6px;align-items:center"><input id="ti" placeholder="Ya yahan type karo…" style="flex:1;margin:0"><button class="btn" id="tsend" style="margin:0">Bhejo</button></div><p style="margin-top:8px"><small>Bolo: "joke sunao", "shayari", "patakhe", "naach", "mera naam ___ hai", "happy diwali"</small></p></section>
+
+</div>
+<footer style="text-align:center;padding:14px 0 6px;font-size:.9rem;color:var(--g);text-shadow:0 0 10px rgba(255,154,60,.5)">Developed by Mansi with love ❤️</footer>
+</main>
+
+<div id="gate"><div class="glass"><h1 style="color:var(--g)">Bunny's Magical Diwali 🐰🪔</h1><p style="margin:10px 0">Ek chhota sa surprise tumhare liye…</p><button class="btn" id="open">Open the magic ✨</button></div></div>
+<div class="glass" id="call" hidden><p style="font-size:2rem">📞</p><h2>Laxmi Ji calling…</h2><button class="btn" id="acc">Accept ✅</button><button class="btn alt" id="dec">Decline ❌</button></div>
+<div id="cine"><i></i><i></i><div id="ttl"><div style="font-size:3rem">🪔</div><h1 class="big" style="animation:none">Bunny's Magical Diwali</h1><p style="color:var(--g);margin-top:8px">Ek chhota sa surprise tumhare liye…</p></div></div>
+<div id="toast" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),rnd=a=>a[Math.floor(Math.random()*a.length)];
+const st={shake:0,mood:'idle',speaking:false,sound:true,mt:0};
+const canSpeak='speechSynthesis' in window&&typeof SpeechSynthesisUtterance!=='undefined';
+let voice=null,lastText='',PITCH=1.2;
+function pickVoice(){if(window.vman)return;const v=speechSynthesis.getVoices();voice=v.find(x=>/^hi/i.test(x.lang))||v.find(x=>/^en[-_]IN/i.test(x.lang))||null}
+if(canSpeak){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}else{$('#snd').hidden=$('#rep').hidden=true;$('#nov').hidden=false}
+function speak(t){if(!canSpeak||!st.sound)return;speechSynthesis.cancel();
+const u=new SpeechSynthesisUtterance(t.replace(/[\u{1F000}-\u{1FFFF}\u2600-\u27BF\uFE0F]/gu,''));
+if(voice){u.voice=voice;u.lang=voice.lang}else u.lang='hi-IN';u.pitch=PITCH;u.rate=1;
+u.onstart=()=>st.speaking=true;u.onend=u.onerror=()=>st.speaking=false;speechSynthesis.speak(u)}
+function say(t,mood='happy'){lastText=t;const b=$('#bub');typeT(t);b.classList.remove('pop');void b.offsetWidth;b.classList.add('pop');st.mood=mood;st.mt=performance.now();speak(t)}
+$('#snd').onclick=()=>{st.sound=!st.sound;$('#snd').textContent=st.sound?'🔊 Sound ON':'🔇 Sound OFF';if(!st.sound){speechSynthesis.cancel();st.speaking=false}};
+$('#rep').onclick=()=>{if(!st.sound){st.sound=true;$('#snd').textContent='🔊 Sound ON'}speak(lastText)};
+function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;setTimeout(()=>t.hidden=true,2500)}
+const last={};function pick(arr,k){let i;do{i=Math.floor(Math.random()*arr.length)}while(arr.length>1&&i===last[k]);last[k]=i;return arr[i]}
+
+/* ---------- 3D bunny (procedural) ---------- */
+const cv=$('#c'),renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(35,1,.1,50);cam.position.set(0,1.1,6.2);cam.lookAt(0,.9,0);
+scene.add(new THREE.HemisphereLight(0xffe9ff,0x4a1c8c,.9));
+const dl=new THREE.DirectionalLight(0xffd9a0,.9);dl.position.set(3,5,4);scene.add(dl);
+const rim=new THREE.PointLight(0xb070ff,.8,20);rim.position.set(-3,2,-2);scene.add(rim);
+const M=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.75},o));
+function S(r,mat,sx=1,sy=1,sz=1,x=0,y=0,z=0,par){const m=new THREE.Mesh(new THREE.SphereGeometry(r,32,24),mat);m.scale.set(sx,sy,sz);m.position.set(x,y,z);if(par)par.add(m);return m}
+const white=M(0xfff8fb),pink=M(0xffb0cc),kurta=M(0xffc21a,{roughness:.55}),gold=M(0xffd76a,{metalness:.7,roughness:.3}),dark=M(0x1a0a2a,{roughness:.2});
+const B=new THREE.Group();scene.add(B);
+S(.8,kurta,1,1.15,.9,0,.1,0,B);
+const tor=(r,y,t=.035)=>{const m=new THREE.Mesh(new THREE.TorusGeometry(r,t,8,40),gold);m.rotation.x=Math.PI/2;m.position.y=y;B.add(m)};
+tor(.5,.95);tor(.72,-.7);tor(.76,-.55,.02);
+for(let i=0;i<5;i++)S(.045,gold,1,1,1,-.4+i*.2,.35,.78,B);
+S(.18,white,1.2,.8,1,-.35,-.95,.35,B);S(.18,white,1.2,.8,1,.35,-.95,.35,B);
+const head=new THREE.Group();head.position.y=1.5;B.add(head);
+S(.78,white,1.12,1,1,0,0,0,head);
+const ears=[-1,1].map(s=>{const g=new THREE.Group();g.position.set(s*.4,.65,0);head.add(g);S(.2,white,1,3.2,.55,0,.6,0,g);S(.12,pink,1,2.6,.4,0,.58,.07,g);return g});
+const eyes=[-1,1].map(s=>{const g=new THREE.Group();g.position.set(s*.33,.1,.68);head.add(g);S(.15,dark,1,1.15,.7,0,0,0,g);S(.05,M(0xffffff,{emissive:0xffffff}),1,1,1,.04,.06,.1,g);S(.025,M(0xffffff,{emissive:0xffffff}),1,1,1,-.04,-.04,.1,g);return g});
+S(.1,pink,1.2,.9,.9,0,-.04,.84,head);
+[-1,1].forEach(s=>S(.15,pink,1,.75,.3,s*.55,-.22,.6,head));
+const mouth=S(.09,M(0x7a1030),1.2,.4,.5,0,-.24,.8,head);
+const armR=new THREE.Group(),armL=new THREE.Group();armR.position.set(.8,.6,.1);armL.position.set(-.8,.6,.1);B.add(armR,armL);
+[armR,armL].forEach((a,i)=>{S(.16,kurta,1,2.2,1,0,-.3,0,a);S(.17,white,1,1,1,0,-.7,0,a)});
+const dy=new THREE.Group();dy.position.set(-.55,.15,.85);B.add(dy);
+const bowl=new THREE.Mesh(new THREE.CylinderGeometry(.22,.12,.1,24),M(0xff7a2a));dy.add(bowl);
+const flame=S(.08,M(0xffe27a,{emissive:0xffa020,emissiveIntensity:1.5}),.8,1.6,.8,0,.15,0,dy);
+const fl=new THREE.PointLight(0xffa040,1.2,6);fl.position.set(0,.3,0);dy.add(fl);
+const SPK=(()=>{const n=220,pos=new Float32Array(n*3);for(let i=0;i<n;i++){pos[i*3]=(Math.random()-.5)*10;pos[i*3+1]=Math.random()*6-1;pos[i*3+2]=(Math.random()-.5)*6-1}const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(pos,3));const p=new THREE.Points(g,new THREE.PointsMaterial({color:0xffd76a,size:.07,transparent:true,opacity:.85,blending:THREE.AdditiveBlending,depthWrite:false}));scene.add(p);return p})();
+(()=>{const n=140,pos=new Float32Array(n*3);for(let i=0;i<n;i++){pos[i*3]=(Math.random()-.5)*26;pos[i*3+1]=Math.random()*9;pos[i*3+2]=-9}const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(pos,3));scene.add(new THREE.Points(g,new THREE.PointsMaterial({color:0xffffff,size:.07,transparent:true,opacity:.7})))})();
+const moon=S(.9,new THREE.MeshBasicMaterial({color:0xfff1c9}),1,1,1,-3.2,3.4,-8,scene);S(1.5,new THREE.MeshBasicMaterial({color:0xffd9a0,transparent:true,opacity:.14,blending:THREE.AdditiveBlending,depthWrite:false}),1,1,1,-3.2,3.4,-8.1,scene);
+const LT=[-2.2,-1.3,1.3,2.2].map((x,i)=>{const g=new THREE.Group();g.position.set(x,3.5-(i%2)*.4,-1.5);scene.add(g);const l=new THREE.Mesh(new THREE.CylinderGeometry(.01,.01,.8,4),gold);l.position.y=-.4;g.add(l);S(.28,M(0xff8a2a,{emissive:0xff6a10,emissiveIntensity:.9}),1,1.25,1,0,-.95,0,g);S(.1,gold,1.5,.5,1.5,0,-.62,0,g);return g});
+const FD=[-1.55,1.55].map(x=>{const g=new THREE.Group();g.position.set(x,-.85,.6);scene.add(g);g.add(new THREE.Mesh(new THREE.CylinderGeometry(.2,.1,.09,20),M(0xff7a2a)));return S(.07,M(0xffe27a,{emissive:0xffa020,emissiveIntensity:1.6}),.8,1.6,.8,0,.13,0,g)});
+let baseZ=6.2,cx=0,ty=null;
+function typeT(t){clearInterval(ty);const b=$('#bub'),A=Array.from(t);let i=0;b.textContent='';ty=setInterval(()=>{b.textContent=A.slice(0,++i).join('');if(i>=A.length)clearInterval(ty)},26)}
+function hearts(x,y){for(let i=0;i<6;i++){const e=document.createElement('span');e.className='heart';e.textContent=rnd(['💖','💗','✨','💕']);e.style.cssText=`left:${x}px;top:${y}px;--dx:${(Math.random()-.5)*120}px;animation-delay:${i*.05}s`;document.body.append(e);setTimeout(()=>e.remove(),2000)}}
+function cine(on){$('#cine').classList.toggle('on',on)}
+function chime(){if(!st.sound)return;const a=ac();if(!a)return;[784,988,1175,1568].forEach((f,i)=>bell(f,a.currentTime+i*.18,.08,1.2))}
+const mouse={x:0,y:0};addEventListener('pointermove',e=>{mouse.x=e.clientX/innerWidth*2-1;mouse.y=e.clientY/innerHeight*2-1;if(Math.random()<.3)spark(e.clientX,e.clientY)});
+
+function size(){const s=$('#stage'),w=s.clientWidth,h=s.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;baseZ=w/h<.9?8.4:6.2;cam.updateProjectionMatrix()}
+addEventListener('resize',size);size();
+let enter=0,started=false;
+function loop(ms){requestAnimationFrame(loop);const t=ms/1000,m=st.mood;
+if(performance.now()-st.mt>3500&&(m==='laugh'||m==='shy'||m==='happy'))st.mood='idle';
+if(started)enter=Math.min(1,enter+.012);const e=1-Math.pow(1-enter,3);if(enter>=1&&!st.landed){st.landed=1;burst(innerWidth*.5,innerHeight*.3,80);st.shake=.6}
+const dance=m==='dance',laugh=m==='laugh';
+B.position.y=-4*(1-e)+Math.abs(Math.sin(enter*20))*(1-e)*.5+Math.abs(Math.sin(t*(dance?6:laugh?11:2.2)))*(dance?.45:laugh?.12:.05);
+B.rotation.y=dance?Math.sin(t*3)*.6:Math.sin(t*.8)*.08;
+B.rotation.z=dance?Math.sin(t*6)*.08:0;const fp=(performance.now()-(st.flip||-1e9))/900;if(fp<1){B.rotation.x=fp*6.283;B.position.y+=Math.sin(Math.PI*fp)*1.1}else B.rotation.x=0;
+head.rotation.z=Math.sin(t*1.3)*.07+(m==='shy'?.22:0);head.rotation.y+=(mouse.x*.35-head.rotation.y)*.05;
+const wave=m==='wave'||m==='happy'||dance;
+armR.rotation.z=wave?-2.5+Math.sin(t*9)*.45:-.25+Math.sin(t*1.5)*.04;
+armL.rotation.z=dance?.8+Math.sin(t*6)*.3:.55;armL.rotation.x=-.5;
+const tw=Math.pow(Math.max(0,Math.sin(t*2.1)),30);
+ears.forEach((g,i)=>g.rotation.z=(i?-1:1)*(.14+Math.sin(t*2.4+i)*.05)*-1+(dance?Math.sin(t*6)*.2:0)+tw*.35*(i?1:-1));
+eyes.forEach((g,i)=>{g.position.x=(i?.33:-.33)+mouse.x*.05;g.position.y=.1-mouse.y*.04});head.rotation.x+=(mouse.y*.15-head.rotation.x)*.05;
+const bl=(t%3.3)<.12?.1:laugh?.3:1;eyes.forEach(g=>g.scale.y=bl);
+mouth.scale.y=st.speaking?.3+Math.abs(Math.sin(t*18))*1.1:laugh?1.4:.5;
+flame.scale.set(.8,1.6+Math.sin(t*14)*.25,.8);fl.intensity=1.1+Math.sin(t*17)*.25;
+const pa=SPK.geometry.attributes.position;for(let i=0;i<pa.count;i++){let y=pa.getY(i)+.004+(i%5)*.0008;if(y>5)y=-1;pa.setY(i,y);pa.setX(i,pa.getX(i)+Math.sin(t+i)*.0008)}pa.needsUpdate=true;
+LT.forEach((l,i)=>l.rotation.z=Math.sin(t*.8+i)*.08);FD.forEach((f,i)=>f.scale.y=1.4+Math.sin(t*13+i)*.25);
+LW=LW.filter(o=>{const p=(performance.now()-o.t0)/9000;if(p>=1){scene.remove(o.g);return false}const k=p*p*(3-2*p);o.g.position.set(-3.2*k+Math.sin(p*9)*.25,.4+3*k,1.3-9.3*k);o.g.scale.setScalar(1-.75*k);o.g.rotation.z=Math.sin(p*7)*.15;return true});
+const sh=st.shake;st.shake*=.9;cx+=(mouse.x*.5-cx)*.05;cam.position.set(cx+(Math.random()-.5)*sh*.25,1.1+Math.sin(t*.5)*.05+(Math.random()-.5)*sh*.25,baseZ+(1-e)*3.5);cam.lookAt(0,.9,0);renderer.render(scene,cam)}
+requestAnimationFrame(loop);
+
+/* ---------- particles & fireworks ---------- */
+const fx=$('#fx'),g=fx.getContext('2d');let P=[],A=[];
+function rs(){fx.width=innerWidth;fx.height=innerHeight}addEventListener('resize',rs);rs();
+for(let i=0;i<45;i++)A.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.8+.5,s:Math.random()*.4+.15,p:Math.random()*6});
+function burst(x=Math.random()*innerWidth,y=Math.random()*innerHeight*.5,n=55){const h=Math.random()*360;for(let i=0;i<n;i++){const a=Math.random()*6.283,s=1+Math.random()*3.5;P.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,l:1,c:`hsl(${h+Math.random()*50},100%,65%)`,r:2,g:.05})}}
+function spark(x,y){P.push({x,y,vx:(Math.random()-.5)*.8,vy:-Math.random(),l:.7,c:'#ffd76a',r:1.5,g:0})}
+(function fl(ms){requestAnimationFrame(fl);g.clearRect(0,0,fx.width,fx.height);
+A.forEach(a=>{a.y-=a.s;a.x+=Math.sin(ms/1500+a.p)*.3;if(a.y<-5){a.y=fx.height+5;a.x=Math.random()*fx.width}g.globalAlpha=.5+Math.sin(ms/600+a.p)*.3;g.fillStyle='#ffd76a';g.beginPath();g.arc(a.x,a.y,a.r,0,6.283);g.fill()});
+P=P.filter(p=>p.l>0);P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=p.g;p.vx*=.99;p.l-=.014;g.globalAlpha=Math.max(p.l,0);g.fillStyle=p.c;g.beginPath();g.arc(p.x,p.y,p.r,0,6.283);g.fill()});g.globalAlpha=1})(0);
+setInterval(()=>{if(!document.hidden&&started&&!matchMedia('(prefers-reduced-motion:reduce)').matches)burst(undefined,undefined,40)},3800);
+
+/* ---------- cracker sounds (WebAudio, no files) ---------- */
+const AC0=window.AudioContext||window.webkitAudioContext;let AC,NB;
+function ac(){if(!AC0)return null;if(!AC){AC=new AC0();const n=AC.sampleRate;NB=AC.createBuffer(1,n,n);const d=NB.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1}if(AC.state==='suspended')AC.resume();return AC}
+function noise(a,t,dur,f,vol,type='lowpass'){const s=a.createBufferSource();s.buffer=NB;const fl=a.createBiquadFilter();fl.type=type;fl.frequency.setValueAtTime(f,t);fl.frequency.exponentialRampToValueAtTime(Math.max(f/6,40),t+dur);const gn=a.createGain();gn.gain.setValueAtTime(vol,t);gn.gain.exponentialRampToValueAtTime(.001,t+dur);s.connect(fl);fl.connect(gn);gn.connect(a.destination);s.start(t);s.stop(t+dur)}
+function boom(){st.shake=1;if(!st.sound)return;const a=ac();if(!a)return;const t=a.currentTime;noise(a,t,.7,1800,.9);const o=a.createOscillator(),g2=a.createGain();o.frequency.setValueAtTime(120,t);o.frequency.exponentialRampToValueAtTime(30,t+.4);g2.gain.setValueAtTime(.8,t);g2.gain.exponentialRampToValueAtTime(.001,t+.45);o.connect(g2);g2.connect(a.destination);o.start(t);o.stop(t+.5);for(let i=0;i<8;i++)noise(a,t+.15+Math.random()*.6,.05,5000,.25,'highpass')}
+function crack(){if(!st.sound)return;const a=ac();if(!a)return;const t=a.currentTime;noise(a,t,.08,6000,.6,'highpass');noise(a,t,.15,900,.4)}
+function whistle(){if(!st.sound)return;const a=ac();if(!a)return;const t=a.currentTime,o=a.createOscillator(),g2=a.createGain();o.type='sine';o.frequency.setValueAtTime(500,t);o.frequency.exponentialRampToValueAtTime(2000,t+.7);g2.gain.setValueAtTime(.07,t);g2.gain.exponentialRampToValueAtTime(.001,t+.75);o.connect(g2);g2.connect(a.destination);o.start(t);o.stop(t+.8)}
+function rocket(){const x=innerWidth*(.15+Math.random()*.7),ty=innerHeight*(.12+Math.random()*.25);let y=innerHeight;whistle();(function up(){y-=innerHeight/42;spark(x,y);spark(x,y+6);if(y>ty)requestAnimationFrame(up);else{burst(x,ty,70);boom()}})()}
+$('#atish').onclick=()=>{for(let i=0;i<10;i++)setTimeout(crack,i*90);for(let i=0;i<6;i++)setTimeout(rocket,900+i*700);say('Atishbaazi shuru! 🧨 Kaan band karo! 😂','laugh')};
+const rc=new THREE.Raycaster(),rv=new THREE.Vector2();
+const POKE=["Hihihi! Gudgudi mat karo! 😂","Oye! Kaan nahi, carrot do! 🥕","Aww, itna pyaar? Main pighal jaunga! 🥺","Ouch! Main nakli nahi, asli bunny hoon! 😤","Boop! Ab meri naak chhoo li, shaadi pakki! 🤭"];let pk=0;
+function chirp(){if(!st.sound)return;const a=ac();if(!a)return;const t=a.currentTime,o=a.createOscillator(),g2=a.createGain();o.frequency.setValueAtTime(900,t);o.frequency.exponentialRampToValueAtTime(1800,t+.12);g2.gain.setValueAtTime(.12,t);g2.gain.exponentialRampToValueAtTime(.001,t+.15);o.connect(g2);g2.connect(a.destination);o.start(t);o.stop(t+.16)}
+function ring(){if(!st.sound)return;const a=ac();if(!a)return;[0,.25].forEach(d=>{const t=a.currentTime+d,o=a.createOscillator(),g2=a.createGain();o.type='square';o.frequency.value=880;g2.gain.setValueAtTime(.04,t);g2.gain.exponentialRampToValueAtTime(.001,t+.18);o.connect(g2);g2.connect(a.destination);o.start(t);o.stop(t+.2)})}
+function rain(l,n=30){for(let i=0;i<n;i++){const e=document.createElement('span');e.className='fall';e.textContent=rnd(l);e.style.cssText=`left:${Math.random()*96}vw;font-size:${20+Math.random()*22}px;animation-duration:${2.5+Math.random()*2.5}s;animation-delay:${Math.random()*1.5}s`;document.body.append(e);setTimeout(()=>e.remove(),7500)}}
+let rt;function callUp(){$('#call').hidden=false;ring();rt=setInterval(ring,1200);say('Arey! Phone baj raha hai… kaun hai? 📞','shy')}
+function endCall(){clearInterval(rt);$('#call').hidden=true}
+$('#acc').onclick=()=>{endCall();say('Hello Laxmi Ji? Haan haan, aa rahi hain? Ruko ruko, pehle carrot ki list dekh lo! 🥕💰','laugh');rain(['🪙','💰','✨']);boom()};
+$('#dec').onclick=()=>{endCall();st.flip=performance.now();say('Arey Laxmi Ji ka call kaat diya?! 😱 Jaldi wapas milao, paise ruk jayenge!','shy')};
+const SUR=[()=>{say('Aa… aa… AACHOOO! 🤧 Arey ye toh patakha nikla!','laugh');boom();burst()},()=>{say('Mithai ki barsaat! Muh kholo sab log! 🍬','laugh');rain(['🍬','🍫','🍩','🪔'])},()=>{st.flip=performance.now();say('Dekha meri backflip? 10 mein se 10! 🤸','wave');chirp()},callUp,()=>{say('Carrot barsaat! Sab mere hain! 🥕','laugh');rain(['🥕'])}];
+$('#sur').onclick=()=>pick(SUR,'sr')();
+$('#stage').addEventListener('click',e=>{if(e.target.closest('.diya')||!started||G)return;const r=cv.getBoundingClientRect();rv.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);rc.setFromCamera(rv,cam);
+if(rc.intersectObject(B,true).length){pk++;chirp();hearts(e.clientX,e.clientY);if(pk%3===0)st.flip=performance.now();say(pick(POKE,'pk'),'laugh');if(pk%5===0)rain(['🥕'])}else{burst(e.clientX,e.clientY,35);crack()}});
+
+/* ---------- game ---------- */
+let G=null;const stg=$('#stage');
+function halfW(){return Math.tan(.3054)*cam.position.z*cam.aspect}
+function gameStop(end){if(!G)return;cancelAnimationFrame(G.raf);G.items.forEach(i=>i.e.remove());stg.classList.remove('g');const sc=G.score;G=null;B.position.x=0;$('#gst').textContent='Phir se khelo 🎮';
+if(end){$('#gs').textContent='Final Score: '+sc;say(sc<8?"Itni kam mithai? Bunny ko bhookha rakhoge? 😭":sc<18?"Waah! Mithai ke shaukeen ho! 🍬":"Mithai ke Badshah! Diet ka kya hua? 🤣",sc<8?'shy':'laugh');[0,300,600].forEach(d=>setTimeout(()=>{burst();boom()},d));rain(['🍬','🍫'],20)}}
+function gameStart(){gameStop();stg.classList.add('g');G={t:30,score:0,items:[],last:performance.now(),sp:0,tx:0};say('Chalo! Mithai pakdo, patakhe se bacho! 🍬🧨','wave');G.raf=requestAnimationFrame(gl)}
+function gl(now){if(!G)return;const dt=Math.min((now-G.last)/1000,.05);G.last=now;G.t-=dt;G.sp-=dt;const H=stg.clientHeight,hw=halfW();
+if(G.sp<=0){G.sp=.55;const k=rnd(['🍬','🍬','🍫','🥕','🧨','🧨']),e=document.createElement('span'),x=.08+Math.random()*.84;e.className='gi';e.textContent=k;e.style.left=x*100+'%';stg.append(e);G.items.push({e,x,y:-30,k})}
+B.position.x+=(G.tx-B.position.x)*.25;
+G.items=G.items.filter(i=>{i.y+=H/2.3*dt;i.e.style.top=i.y+'px';const wx=(i.x*2-1)*hw;
+if(i.y>H*.5&&i.y<H*.85&&Math.abs(wx-B.position.x)<.9){if(i.k==='🧨'){G.score=Math.max(0,G.score-2);crack()}else{G.score+=i.k==='🥕'?2:1;chirp()}i.e.remove();return false}
+if(i.y>H){i.e.remove();return false}return true});
+$('#gs').textContent='Score: '+G.score+'   ⏱ '+Math.max(0,Math.ceil(G.t));
+if(G.t<=0)return gameStop(true);G.raf=requestAnimationFrame(gl)}
+['pointermove','pointerdown'].forEach(ev=>stg.addEventListener(ev,e=>{if(!G)return;const r=stg.getBoundingClientRect(),hw=halfW();G.tx=Math.max(-hw*.85,Math.min(hw*.85,((e.clientX-r.left)/r.width*2-1)*hw))}));
+$('#gst').onclick=gameStart;
+
+/* ---------- quiz ---------- */
+const QZ=[["Mithai ka dabba dikha toh tum?",["Sabse badi mithai uthake bhaagta hoon","Mithai ke saath naachna shuru","Sabko baantke last mein khata hoon","Chupke se dabba gayab kar deta hoon"]],["Diwali ki safai mein tum?",["Leader banta hoon, kaam doosre karte hain","Gaana laga ke naachte hue safai","Sabki help karta hoon","Chupke se phone mein ghus jaata hoon"]],["Tumhara Diwali outfit?",["Full shaan, heavy kurta/saree","Rangeen aur sabse alag","Simple aur pyaara","Jo pehle mila wohi"]],["Patakhon se tum?",["Bade dhamake, shor machao!","Chakri dekh ke gol-gol ghoomna","Phuljhadi se naam likhna","Door se dekhna, kaan band!"]]];
+const RS=[["Anaar 🎇","Tum roshni ke raja/rani ho! Jahan jao, mehfil lag jaati hai."],["Chakri 🌀","Tum masti ke dhurandhar ho! Tumhare saath boring pal bhi gol-gol ghoom jaate hain."],["Phuljhadi ✨","Tum sabke pyaare ho! Bina shor kiye sabki zindagi roshan kar dete ho."],["Sutli Bomb 💣","Dikhte shaant ho, par andar se full dhamaka! Ek din sabko surprise doge."]];
+let qi=0,qs=[0,0,0,0];
+function qStart(){qi=0;qs=[0,0,0,0];say('Chalo dekhte hain tum kaun si Diwali ho! 🪔','happy');showQ()}
+function showQ(){const o=$('#qo');o.innerHTML='';
+if(qi>=QZ.length){const r=qs.indexOf(Math.max(...qs));$('#qq').textContent='Tum ho: '+RS[r][0];const p=document.createElement('p');p.textContent=RS[r][1];p.style.cssText='font-size:1.1rem;margin:8px 0';const b=document.createElement('button');b.className='btn';b.textContent='Phir se khelo 🔁';b.onclick=qStart;o.append(p,b);say('Tum ho '+RS[r][0]+'! '+RS[r][1],'laugh');burst();return}
+$('#qq').textContent=(qi+1)+'/4: '+QZ[qi][0];
+QZ[qi][1].forEach((t,i)=>{const b=document.createElement('button');b.className='btn alt';b.style.cssText='display:block;width:100%;margin:6px 0;text-align:left';b.textContent=t;b.onclick=()=>{qs[i]++;qi++;chirp();showQ()};o.append(b)})}
+
+/* ---------- rashifal ---------- */
+const RA=["Mesh","Vrishabh","Mithun","Kark","Singh","Kanya","Tula","Vrishchik","Dhanu","Makar","Kumbh","Meen"];
+const R1=["Aaj tumhe 3 mithai ke dabbe milenge","Aaj dhan-labh ka pakka yog hai","Aaj Laxmi Ji tumhare ghar ka pata dhundh rahi hain","Aaj tumhari selfie 100 likes layegi"],R2=["par 2 rishtedaar maang lenge! 😂","lekin UPI limit khatam hone ka khatra hai!","bas diet ko ek din ki chutti dena.","par patakhe wale padosi se door rehna! 🧨"],R3=["gulab jamun 🍯","diya 🪔","carrot 🥕","naya kurta 👘","chai ☕"];
+$('#rs').innerHTML=RA.map(r=>`<option>${r}</option>`).join('');
+$('#rgo').onclick=()=>{const n=$('#nm').value.trim(),t=`${n?n+' ji, ':''}${$('#rs').value} rashi: ${pick(R1,'a')} ${pick(R2,'b')} Lucky cheez: ${pick(R3,'c')}.`;$('#rt').textContent=t;say(t,'wave');chirp()};
+
+/* ---------- costumes ---------- */
+const DR={};function mk(n,par,fn){const g=new THREE.Group();g.visible=false;par.add(g);fn(g);DR[n]=g}
+mk('topi',head,g=>{const c=new THREE.Mesh(new THREE.ConeGeometry(.32,.8,24),M(0xff4f9a));c.position.set(0,1.05,.15);c.rotation.z=.15;g.add(c);S(.09,gold,1,1,1,-.04,1.47,.15,g)});
+mk('pagdi',head,g=>{S(.6,M(0xff5a1f),1.25,.62,1.1,0,.62,0,g);const t=new THREE.Mesh(new THREE.TorusGeometry(.7,.04,8,32),gold);t.rotation.x=Math.PI/2;t.position.y=.5;g.add(t);S(.07,M(0xff2d6b),1,1,1,0,.6,.68,g);S(.06,white,.6,2.5,.6,.1,1,.3,g)});
+mk('chashma',head,g=>{[-1,1].forEach(s=>{const r=new THREE.Mesh(new THREE.TorusGeometry(.2,.035,8,24),gold);r.position.set(s*.36,.04,.82);g.add(r);S(.2,M(0x111133,{transparent:true,opacity:.5}),1,1,.08,s*.36,.04,.8,g)});S(.03,gold,4,1,1,0,.06,.82,g)});
+mk('mooch',head,g=>{[-1,1].forEach(s=>{const m=S(.14,dark,1.8,.35,.5,s*.14,-.16,.82,g);m.rotation.z=-s*.3})});
+mk('mala',B,g=>{for(let i=0;i<20;i++){const a=i/20*6.283,c=Math.cos(a);S(.1,M(i%2?0xff9a1f:0xffc21a),1,1,1,Math.sin(a)*.68,.82-.4*Math.max(0,c),c*.6,g)}});
+const DL={topi:"Party hat? Diwali hai, birthday nahi! 😂",chashma:"Cool lag raha hoon na? 😎",mooch:"Ab main Bunny Singham! 🥸",pagdi:"Raja Bunny aa gaya! 👑",mala:"Genda phool, tyohaar ka full look! 🌼"};
+document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{const d=b.dataset.d;if(d==='none'){Object.values(DR).forEach(g=>g.visible=false);say('Sab utaar diya! Wapas natural bunny 😌','happy')}else{DR[d].visible=!DR[d].visible;say(DL[d],'laugh');chirp();burst(innerWidth/2,innerHeight*.25,20)}});
+
+/* ---------- ground crackers ---------- */
+function base(){const r=stg.getBoundingClientRect();return[r.left+r.width*(.3+Math.random()*.4),r.bottom-24]}
+function hiss(){if(!st.sound)return;const a=ac();if(a)noise(a,a.currentTime,1,4500,.22,'highpass')}
+function run(n,f){let i=0;(function s(){f(i);if(++i<n)requestAnimationFrame(s)})()}
+$('#c1').onclick=()=>{const[x,y]=base();hiss();run(70,()=>{for(let k=0;k<5;k++)P.push({x,y,vx:(Math.random()-.5)*2.4,vy:-4-Math.random()*3,l:1,c:rnd(['#ffd76a','#ff9a3c','#fff3b0']),r:2,g:.12})});say('Anaar jal gaya! Door se dekhna! 🎇','laugh')};
+$('#c2').onclick=()=>{const[x,y]=base();hiss();let a=0;run(100,()=>{a+=.45;for(let k=0;k<2;k++){const b=a+k*3.14;P.push({x:x+Math.cos(b)*14,y:y-20+Math.sin(b)*14,vx:-Math.sin(b)*3,vy:Math.cos(b)*3,l:.8,c:rnd(['#ff5e7e','#ffd76a','#77aaff']),r:2,g:0})}});say('Chakri ghoom rahi hai, mera sar bhi! 🌀','laugh')};
+$('#c3').onclick=()=>{const[x,y]=base();for(let i=0;i<14;i++)setTimeout(()=>{if(st.sound){const a=ac();if(a)noise(a,a.currentTime,.04,7000,.18,'highpass')}},i*90);run(110,()=>{for(let k=0;k<4;k++){const a=Math.random()*6.28,s=1+Math.random()*2.5;P.push({x,y:y-40,vx:Math.cos(a)*s,vy:Math.sin(a)*s,l:.55,c:rnd(['#ffffff','#ffd76a','#ffe9a0']),r:1.3,g:.05})}});say('Phuljhadi se naam likhna! ✨','happy')};
+
+/* ---------- voice chat (keyword based) ---------- */
+const SRc=window.SpeechRecognition||window.webkitSpeechRecognition;let rec=null,listening=false;
+const FB=["Hmm? Kya bola? Mere kaan lambe hain par aaj sun nahi paaya! 🐰 Phir se bolo!","Ye toh mujhe samajh nahi aaya, par sunne mein bahut cute laga! 😂","Arey thoda saaf bolo na! Try karo: joke, shayari, patakhe ya naach! 🥕","Main chhota sa bunny hoon, itni mushkil baatein nahi samajhta! 😅 Joke maango na!"];
+const INT=[
+[/mithai|sweet|मिठाई/,()=>say('Mithai?! Kahan hai kahan hai?! Mere liye bhi bachana! 🍬','laugh')],
+[/joke|jok\b|चुटकुला|जोक|hasao|हंसाओ/,()=>{const j=pick(JK,'j');say(j[0],'happy');setTimeout(()=>say(j[1]+' Hahaha!','laugh'),4500)}],
+[/shayari|shayri|शायरी|शेर/,()=>say(pick(SH,'s').replace(/\n/g,' '),'happy')],
+[/patake|patakha|cracker|पटाख|atish|आतिश/,()=>$('#atish').click()],
+[/dance|naach|nach\b|नाच|डांस/,()=>{say('Dekho meri dance! 💃🐰','dance');setTimeout(()=>{if(st.mood==='dance')st.mood='idle'},6000)}],
+[/kaise ho|kese ho|how are you|कैसे हो|कैसी हो|kya haal|क्या हाल/,()=>say('Main toh ekdum mast! Aaj mithai khayi, ab energy full! Tum batao? 🐰','laugh')],
+[/tera naam|tumhara naam|aapka naam|your name|तुम्हारा नाम|तेरा नाम|आपका नाम/,()=>say('Main Bunny hoon, Diwali wala! Aur tumhara naam kya hai? 😊','wave')],
+[/thank|shukriya|धन्यवाद|शुक्रिया|थैंक/,()=>say('Arey koi baat nahi! Bas ek carrot de dena! 🥕','laugh')],
+[/love|pyaar|pyar|प्यार|लव/,()=>say('Aww! Main sharma gaya! 🥺 Tum bhi bahut pyaare ho!','shy')],
+[/bye|alvida|अलविदा|बाय|tata/,()=>say('Bye bye! Agle Diwali par phir milna, promise! 🥺❤️','wave')],
+[/diwali|deepavali|दिवाली|दीवाली|दिपावली|happy/,()=>{say('Happy Diwali! ✨ Tumhari life mein khushiyan hi khushiyan ho! 🪔','wave');burst();boom()}],
+[/hello|\bhi\b|\bhey\b|namaste|namaskar|नमस्ते|हेलो|हैलो|हाय|नमस्कार/,()=>say('Namaste ji! Kaise ho? Diwali ki taiyaari kaisi chal rahi hai? 😄','wave')]];
+function reply(raw){const t=raw.toLowerCase();$('#heard').textContent='Tumne kaha: "'+raw+'"';
+const nm=t.match(/(?:mera naam|my name is|मेरा नाम)\s+([^\s]+)/);
+if(nm){const n=nm[1].replace(/[<>]/g,'');$('#nm').value=n;return say(`Arey wah ${n}! Kitna pyaara naam hai! Happy Diwali ${n}! ❤️`,'wave')}
+for(const [re,f] of INT)if(re.test(t))return f();
+say(pick(FB,'fb'),'shy')}
+function listen(){if(listening){rec.stop();return}
+if(canSpeak)speechSynthesis.cancel();st.speaking=false;
+rec=new SRc();rec.lang=$('#lg').value;rec.interimResults=false;rec.maxAlternatives=1;
+rec.onstart=()=>{listening=true;$('#mic').textContent='🎙️ Sun raha hoon… (rokne ke liye tap)';st.mood='shy';st.mt=Infinity};
+rec.onresult=e=>reply(e.results[0][0].transcript);
+rec.onerror=e=>{$('#heard').textContent=(e.error==='not-allowed'||e.error==='service-not-allowed')?'Mic ki permission nahi mili. Browser mein mic allow karo, ya neeche type karo.':e.error==='no-speech'?'Kuch sunai nahi diya, phir se try karo!':'Voice error: '+e.error+'. Neeche type karke bhi baat kar sakte ho.'};
+rec.onend=()=>{listening=false;$('#mic').textContent='🎤 Bunny se bolo';if(st.mt===Infinity){st.mood='idle';st.mt=performance.now()}};
+try{rec.start()}catch(e){}}
+if(SRc)$('#mic').onclick=listen;else{$('#mic').hidden=$('#lg').hidden=true;$('#tn').textContent='Is browser mein mic se sunna supported nahi hai (Chrome try karo). Neeche type karke baat kar sakte ho.'}
+function sendT(){const v=$('#ti').value.trim();if(v){reply(v);$('#ti').value=''}}
+$('#tsend').onclick=sendT;$('#ti').onkeydown=e=>{if(e.key==='Enter')sendT()};
+
+/* ---------- bunny ka gaana (original song) ---------- */
+const V1=["Tip-tip-tip kar diya jalaya","Chhota bunny muskuraya","Kurta pehna peela-peela","Dil mera hai rangeen-rangeela"];
+const CH=["Jhilmil jhilmil diye jale","Bunny naache, sab sang chale","Laddoo, carrot, hansi ke rang","Happy Diwali, sabke sang!"];
+const V2=["Anaar phoote, chakri ghoome","Meethi meethi khushiyan jhoome","Mithai khake pet hua gol","Bunny bola: bolo bolo bol!"];
+const OUT=["Happy Diwali, Happy Diwali","Sabki jholi khushiyon se bhar do!"];
+const MEL=[659.25,783.99,880,783.99,659.25,587.33,523.25,587.33,659.25,783.99,880,1046.5,880,783.99,659.25,783.99],BS=[130.8,130.8,196,196];
+let sg=null;
+function bell(f,t,v,d=.6){const a=AC,o=a.createOscillator(),g2=a.createGain();o.type='triangle';o.frequency.value=f;g2.gain.setValueAtTime(v,t);g2.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g2);g2.connect(a.destination);o.start(t);o.stop(t+d+.05)}
+function musicTick(){if(!st.sound||!sg)return;const a=ac();if(!a)return;const t=a.currentTime+.02,i=sg.step++;bell(MEL[i%16],t,.07);if(i%2===0)bell(BS[(i>>1)%4],t,.06,.5);if(i%8===7)bell(MEL[i%16]*2,t,.03,.3)}
+function songStop(fin){if(!sg)return;clearInterval(sg.mt);sg=null;if(canSpeak)speechSynthesis.cancel();st.speaking=false;st.mood='idle';st.mt=performance.now();$('#sgb').textContent='🎵 Gaana suno';$('#lyr').textContent='';
+if(fin){say('Kaisa laga mera gaana? Taali bajao! 👏','laugh');rain(['🪔','✨','🎵']);[0,300].forEach(d=>setTimeout(()=>{burst();boom()},d))}}
+function songStart(){if(sg){songStop();return}
+st.sound=true;$('#snd').textContent='🔊 Sound ON';ac();if(canSpeak)speechSynthesis.cancel();
+sg={i:0,step:0,lines:[...V1,...CH,...V2,...CH,...OUT]};st.mood='dance';st.mt=Infinity;$('#sgb').textContent='⏹ Gaana roko';
+sg.mt=setInterval(musicTick,300);nextLine()}
+function nextLine(){const my=sg;if(!my)return;if(my.i>=my.lines.length)return songStop(true);
+const l=my.lines[my.i++],idx=my.i;$('#lyr').textContent=l;$('#bub').textContent=l+' 🎵';st.mood='dance';st.mt=Infinity;if(idx%4===0)burst(innerWidth/2,innerHeight*.25,20);
+let done=false;const adv=()=>{if(!done&&sg===my&&my.i===idx){done=true;setTimeout(nextLine,150)}};
+setTimeout(adv,8000);
+if(canSpeak&&st.sound){const u=new SpeechSynthesisUtterance(l);if(voice){u.voice=voice;u.lang=voice.lang}else u.lang='hi-IN';u.pitch=PITCH+.2;u.rate=.8;u.onstart=()=>st.speaking=true;u.onend=u.onerror=()=>{st.speaking=false;adv()};speechSynthesis.speak(u)}
+else setTimeout(adv,3000)}
+$('#sgb').onclick=songStart;
+
+/* ---------- wish lantern ---------- */
+let LW=[];
+function launchLantern(){const w=$('#lw').value.trim().replace(/[<>]/g,'');if(!w){toast('Pehle wish likho! 🏮');return}
+const g=new THREE.Group();S(.3,M(0xff8a2a,{emissive:0xff6a10,emissiveIntensity:1.3}),1,1.3,1,0,0,0,g);S(.12,gold,1.6,.4,1.6,0,.38,0,g);S(.12,gold,1.6,.4,1.6,0,-.38,0,g);g.position.set(0,.4,1.3);scene.add(g);LW.push({g,t0:performance.now()});
+chime();burst(innerWidth/2,innerHeight*.3,30);say(`Teri wish: "${w}" udd gayi chaand ki taraf! 🏮 Zaroor poori hogi!`,'wave');$('#lw').value=''}
+$('#lb').onclick=launchLantern;$('#lw').onkeydown=e=>{if(e.key==='Enter')launchLantern()};
+
+/* ---------- diya memory game ---------- */
+let SM=null,sbest=0;const SF=[523.25,659.25,783.99,1046.5],SB=[...document.querySelectorAll('.sd')];
+function sflash(i){SB[i].classList.add('lit');if(st.sound){const a=ac();if(a)bell(SF[i],a.currentTime,.12,.8)}setTimeout(()=>SB[i].classList.remove('lit'),350)}
+function sround(){if(!SM)return;SM.in=false;SM.pos=0;SM.seq.push(Math.floor(Math.random()*4));$('#sst').textContent='Dekho… 👀 Round '+SM.seq.length;SM.seq.forEach((v,k)=>setTimeout(()=>sflash(v),700+k*600));setTimeout(()=>{if(SM){SM.in=true;$('#sst').textContent='Ab tumhari baari! 👆'}},700+SM.seq.length*600)}
+SB.forEach((b,i)=>b.onclick=()=>{if(!SM||!SM.in)return;sflash(i);
+if(i!==SM.seq[SM.pos]){const n=SM.seq.length-1;sbest=Math.max(sbest,n);$('#sst').textContent=`Galat! Tum round ${n} tak pahunche. Best: ${sbest}`;say(pick(["Oho! Galat diya! Bunny ka dil toot gaya 😭","Mithai khake dimaag slow ho gaya! 🤣","Ek aur try karo, is baar pakka! 💪"],'sl'),'shy');SM=null;return}
+if(++SM.pos===SM.seq.length){SM.in=false;chirp();if(SM.seq.length%3===0){say(pick(["Waah! Tum toh Diya Master ho! 🪔","Memory ho toh aisi! 🤩"],'sw'),'wave');burst()}setTimeout(sround,900)}});
+$('#ssb').onclick=()=>{SM={seq:[],pos:0,in:false};say('Diya ka order yaad rakho! 🪔','happy');sround()};
+
+/* ---------- hidden diyas ---------- */
+let hf=0;const HP=[[3,12],[94,18],[5,48],[93,52],[48,3],[22,93],[78,92],[95,80],[3,82],[62,45]];
+function hideDiyas(){HP.forEach(([x,y])=>{const b=document.createElement('button');b.className='hd';b.textContent='🪔';b.setAttribute('aria-label','Chhupa diya');b.style.cssText=`left:${x}%;top:${y}%`;
+b.onclick=()=>{const r=b.getBoundingClientRect();b.classList.add('f');b.disabled=true;chirp();hearts(r.left,r.top);hf++;$('#hdc').textContent='🔍 '+hf+'/10';toast('Diya mila! '+hf+'/10 🪔');setTimeout(()=>b.remove(),900);
+if(hf===10){say('Wah! Tum toh Diwali Detective ho! 🕵️🪔 Saare diye dhundh liye!','laugh');[0,300,600,900].forEach(d=>setTimeout(()=>{burst();boom()},d));rain(['🪔','✨','🏆'])}};document.body.append(b)});$('#hdc').hidden=false}
+
+/* ---------- awaaz settings ---------- */
+(function(){const sel=$('#vs');
+function fill(){if(!canSpeak)return;const v=speechSynthesis.getVoices();sel.textContent='';const o=document.createElement('option');o.value='';o.textContent='Auto (Hindi/Indian)';sel.append(o);v.forEach((x,i)=>{const e=document.createElement('option');e.value=i;e.textContent=x.name+' ('+x.lang+')';sel.append(e)})}
+if(canSpeak){fill();speechSynthesis.addEventListener('voiceschanged',fill)}else $('#vn').textContent='Is browser mein voice supported nahi hai.';
+sel.onchange=()=>{if(sel.value===''){window.vman=false;pickVoice()}else{window.vman=true;voice=speechSynthesis.getVoices()[+sel.value]}};
+$('#pt').oninput=()=>{PITCH=+$('#pt').value;$('#pv').textContent=PITCH.toFixed(1)};
+$('#vt').onclick=()=>say('Hello ji! Happy Diwali! Kaisi lag rahi hai meri awaaz? 🐰','happy')})();
+
+/* ---------- diyas ---------- */
+const dw=$('#diyas');for(let i=0;i<5;i++){const b=document.createElement('button');b.className='diya';b.textContent='🪔';b.setAttribute('aria-label','Light diya '+(i+1));b.onclick=()=>b.classList.toggle('on');dw.append(b)}
+function lightNext(){const off=[...dw.children].filter(d=>!d.classList.contains('on'));if(off.length){off[0].classList.add('on');burst(innerWidth/2,innerHeight*.3,25)}else{say('Saare diye jal gaye! Ab ghar jagmag-jagmag! ✨','laugh')}}
+$('#lit').onclick=lightNext;
+$('#burst').onclick=()=>{[0,250,500].forEach(d=>setTimeout(()=>{burst();boom()},d));say('Patakhe kam, khushiyan zyada! Samjhe na? 🤭','laugh')};
+
+/* ---------- content ---------- */
+const MSG=["Hello ji! Itne serious kyun ho? Diwali hai, interview nahi! 😂","Pehle smile karo, phir Happy Diwali bolunga! 😁","Mithai kha lena, lekin mere liye bhi bachakar rakhna! 🍬","Patakhe kam, khushiyan zyada! Samjhe na? 🤭","Aaj diet-viet sab cancel! Diwali hai boss! 🤣","Tumhari life mein itni khushiyan aayein jitne Diwali mein lights hoti hain!","Oye suno! Tum bahut special ho. Ab smile bhi kar do! ❤️"];
+const SH=["Diye jale aur khushiyan aayein,\nHar taraf muskurahatein chhayein,\nBunny ki taraf se ek hi dua,\nTumhari har wish poori ho jaaye! ❤️","Na tension ho, na gham ka dera,\nKhushiyon se roshan ho ghar tera,\nMithai mile aur paise bhi aayein,\nHappy Diwali sabko hum sunayein! 😂","Roshni se chamke tumhara jahaan,\nKhushiyon se bhara rahe aashiyaan,\nHar sapna tumhara poora ho,\nAur har din Diwali jaisa ho! ✨","Laxmi ji aayein tumhare ghar,\nPaise barsein idhar-udhar,\nShopping karo bina soche,\nBas credit card ka bill na roye! 🤣"];
+const JK=[["Diwali mein sabse zyada khush kaun hota hai?","Mithai ka dabba! Kyunki sab uske peeche pade rehte hain!"],["Diwali par phone ki battery kyun khush hoti hai?","Sab log uske saath photos lete hain!"],["Bunny Diwali par kya maangta hai?","Carrot ki lifetime supply! 🥕"]];
+const MOODS=['happy','laugh','wave','shy'];
+function panel(n){document.querySelectorAll('section').forEach(s=>s.hidden=s.id!=='p-'+n);if(n==='shayari')nextS();if(n==='jokes')nextJ();if(n==='chat')chat();if(n==='fin')finale();if(n!=='game')gameStop();if(n!=='song')songStop();if(n!=='sim')SM=null;if(n!=='talk'&&listening)rec.stop();if(n==='talk')say('Mic dabao aur mujhse baat karo! Main sun raha hoon 👂','happy');if(n==='quiz')qStart();if(n==='crk')say('Zameen par patakhe jalao! Door se, haan? 😂','wave')}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>panel(b.dataset.p));
+function chat(){say(pick(MSG,'m'),rnd(MOODS))}$('#more').onclick=chat;
+function nextS(){const s=pick(SH,'s');$('#verse').textContent=s;say('Suno suno! '+s.replace(/\n/g,' '),rnd(['happy','shy','wave']));burst(innerWidth/2,innerHeight*.25,20)}$('#nextS').onclick=nextS;
+let jt;function nextJ(){const j=pick(JK,'j');clearTimeout(jt);$('#jq').textContent='Q: '+j[0];$('#ja').textContent='';say(j[0],'happy');jt=setTimeout(()=>{$('#ja').textContent='A: '+j[1];say(j[1]+' Hahaha!','laugh')},4500)}$('#nextJ').onclick=nextJ;
+
+/* ---------- wish ---------- */
+let wishText='';
+function makeWish(){const n=$('#nm').value.trim().replace(/[<>]/g,'');if(!n){toast('Pehle naam toh batao! 😊');$('#nm').focus();return}
+wishText=`Arey wah ${n}! Tumhe aur tumhari family ko meri taraf se bahut saari Happy Diwali wishes! ❤️`;
+$('#cn').textContent=n;$('#ct').textContent=wishText;$('#card').hidden=false;$('#share').hidden=false;say(wishText,'wave');[0,300,600].forEach(d=>setTimeout(()=>burst(),d))}
+$('#go').onclick=makeWish;$('#nm').onkeydown=e=>{if(e.key==='Enter')makeWish()};
+$('#share').onclick=async()=>{const text=wishText+' 🪔🐰 — Bunny';const data={title:"Bunny's Magical Diwali",text,url:location.href};
+try{if(navigator.share){await navigator.share(data);return}}catch(e){if(e.name==='AbortError')return}
+try{await navigator.clipboard.writeText(text+' '+location.href);toast('Message copy ho gaya! Ab paste karke bhejo 📋')}catch(e){prompt('Copy this message:',text+' '+location.href)}};
+
+/* ---------- finale ---------- */
+let ft=[],fi;
+function finale(){ft.forEach(clearTimeout);clearInterval(fi);st.mood='dance';st.mt=Infinity;
+[0,300,600,900].forEach(d=>setTimeout(()=>burst(),d));fi=setInterval(()=>burst(),900);
+say('Happy Diwali! ✨ May your life sparkle with happiness, love, laughter and endless blessings.','dance');
+ft=[setTimeout(()=>say('Achha ji, ab jaane se pehle ek promise karo... agle Diwali par bhi mujhse milne aaoge na? 🥺','dance'),7000),
+setTimeout(()=>{say('Tab tak ke liye... BYEEEE! Happy Diwali! ❤️🐰','wave');st.mt=performance.now()},14500),
+setTimeout(()=>clearInterval(fi),19000)]}
+$('#again').onclick=finale;
+document.querySelectorAll('nav button:not([data-p=fin])').forEach(b=>b.addEventListener('click',()=>{ft.forEach(clearTimeout);clearInterval(fi)}));
+
+/* ---------- intro ---------- */
+$('#bub').textContent='Bunny aa raha hai… 🪔';
+$('#open').onclick=()=>{$('#gate').hidden=true;ac();chime();cine(true);setTimeout(()=>{cine(false);intro()},2800)};
+function intro(){started=true;hideDiyas();
+[0,500,1100].forEach(d=>setTimeout(()=>{burst();lightNext()},d));
+setTimeout(()=>say('Areyyyy Helloooo! 👋','wave'),1800);
+setTimeout(()=>say('Finally tum aa hi gaye! Main kabse tumhara wait kar raha tha! 😂','laugh'),4200);
+setTimeout(()=>{say('Welcome to my little Diwali world! 🐰','happy');$('#start').hidden=false},8200)}
+$('#start').onclick=()=>{$('#start').hidden=true;$('#nstep').hidden=false;say('Waise tumhara naam kya hai? 😊','shy');setTimeout(()=>$('#nm0').focus(),300)};
+function enterApp(p){$('#nstep').hidden=true;$('#app').hidden=false;panel(p)}
+function nameGo(){const n=$('#nm0').value.trim();if(!n){toast('Pehle naam toh batao! 😊');$('#nm0').focus();return}$('#nm').value=n;enterApp('wish');makeWish()}
+$('#ngo').onclick=nameGo;$('#nm0').onkeydown=e=>{if(e.key==='Enter')nameGo()};
+$('#nskip').onclick=()=>enterApp('chat');
+</script>
+</body>
+</html>
